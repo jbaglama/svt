@@ -1,4 +1,4 @@
-#  **A Hybrid Algorithm for Computing a Partial Singular Value Decomposition Satisfying a Given Threshold**
+#  A Hybrid Algorithm for Computing a Partial Singular Value Decomposition Satisfying a Given Threshold
 
 ---
 #  Authors: 
@@ -14,11 +14,15 @@ A hybrid singular value wrapper function that repeatedly calls the thick-restart
 
 ## Input and Optional Parameters
 
+The necessary inputs for the routine are:
+
 | Input | Version |Description |
 |-------|---------|------------|
 |`A`| **Matlab** |An $m\times n$ numeric real matrix $A$ or a function handle.|
 |`A`| **${\tt R}$**| An $m\times n$ numeric sparse real matrix (matrix-product input is not available).|
 |`A`| **Octave** | ???|
+
+Meanwhile, the optional arguments for the function in the distinct languages are:
 
 | Parameters | Version | Description |
 |------------|-------------|---------|
@@ -85,32 +89,70 @@ Below, we describe the general output of the main routines.
 
 ##  EXAMPLES:
 
-1. Compute all singular triplets with singular values exceeding 5.1:<br> **In ${\tt R}$:** psvd <- svt_irlba(A,sigma=5.1) <br>  **In MAtlab:** [U,S,V,FLAG] = svt_svds(A,'sigma',5.1); <br> or <br> [U,S,V,FLAG] = svt_irlba(A,'sigma',5.1);
-2. Compute all singular triplets with singular values exceeding 5.1 given an initial PSVD psvd0:
-      
-          -**In ${\tt R}$:** psvd <- svt_irlba(A,sigma=5.1,psvd=psvd0)
+1. Compute all singular triplets with singular values exceeding `5.1`:
 
-      3. Compute all singular triplets with singular values exceeding 1.1,
-         within tolerance of 1e-10 and provide a maximum of 20 singular triplets:
-          -**$In {\tt R}$:** psvd <- svt_irlba(A,sigma=1.1,tol=1e-10,psvdmax=20)
+<div align="center">
 
-      4. Compute the top 6 singular triplets and then continue:
-          -**In ${\tt R}$:** psvd0 <- svt_irlba(A) 
-          
-         Then, assume that based on the output the desired threshold is 100 and set
-         psvdmax, the number of singular triplets to 20:
-         
-         -**In ${\tt R}$:** psvd <- svt_irlba(A,sigma=100,psvd=psvd0,psvdmax=20)
-         
-         
-         The user can check if any multiple singular values have been missed by
-         calling the function again with the same parameters and threshold, but
-         with the output from the previous call
+| Software | Command |
+|--------|-------------|
+|**${\tt R}$:**| `psvd <- svt_irlba(A,sigma=5.1)`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_svds(A,'sigma',5.1);`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_irlba(A,'sigma',5.1);`|
 
-      5. Compute the energy percentage 0.9:
-          -**In ${\tt R}$:** psvd <- svt_irlba(A,energy = 0.9)
+</div>
+
+2. Compute all singular triplets with singular values exceeding `5.1` given an initial PSVD `psvd0`:
+
+<div align="center">
+
+| Software | Command |
+|--------|-------------|
+|**${\tt R}$:**| `psvd <- svt_irlba(A,sigma=5.1,psvd=psvd0)`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_svds(A,'sigma',5.1,'U0',U0,'V0',V0,'S0',S0);`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_irlba(A,'sigma',5.1,'U0',U0,'V0',V0,'S0',S0);`|
+
+</div>
+
+3. Compute all singular triplets with singular values exceeding `1.1`, within tolerance of `1e-10` and provide a maximum of `20` singular triplets:
+
+<div align="center">
+
+| Software | Command |
+|--------|-------------|
+|**${\tt R}$:**| `psvd <- svt_irlba(A,sigma=1.1,tol=1e-10,psvdmax=20)`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_svds(A,'sigma',5.1,'tol',1d-10,'psvdmax',20);`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_irlba(A,'sigma',5.1,'tol',1d-10,'psvdmax',20);`|
+
+</div>
+
+4. Compute the top `6` singular triplets and then continue computing more. <br>Assume that based on the output, the desired threshold is 100<br> and set `psvdmax`, the number of singular triplets to `20`:
+
+<div align="center">
+
+| Software | Commands |
+|--------|-------------|
+|**${\tt R}$:**| `psvd0 <- svt_irlba(A)`  <br> `psvd <- svt_irlba(A,sigma=100,psvd=psvd0,psvdmax=20)`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_svds(A);`  <br> `[U,S,V,FLAG] = svt_svds(A,'sigma',100,'U0',U,'V0',V,'S0',S,'psvdmax',20);`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_irlba(A);` <br> `[U,S,V,FLAG] = svt_irlba(A,'sigma',100,'U0',U,'V0',V,'S0',S,'psvdmax',20);`|
+
+</div>
+
+**Note:** The user can check if any multiple singular values have been missed by calling the function again with the same parameters and threshold, but with the output from the previous call.
+
+5. Compute the energy percentage 0.9:
+
+<div align="center">
+
+| Software | Command |
+|--------|-------------|
+|**${\tt R}$:**| `psvd <- svt_irlba(A,energy = 0.9)`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_svds(A,'energy',0.9);`|
+|**Matlab:** | `[U,S,V,FLAG] = svt_irlba(A,'energy',0.9);`|
+
+</div>
+
     
-##  DATE LAST MODIFIED: 
+##  Date Last Modified: 
  4/24/24
   
 
@@ -119,7 +161,7 @@ Below, we describe the general output of the main routines.
 <a id="1">[1]</a> 
 J. Baglama, J.Chavez-Casillas and V. Perovic, "A Hybrid Algorithm for Computing a Partial Singular Value Decomposition Satisfying a Given Threshold", submitted for publication 2024.
 
-[^1]  J. Baglama and V. Perovic, "Explicit Deflation in Golub–Kahan–Lanczos Bidiagonalization Methods, ETNA, Vol. 58, (2023), pp. 164–176.
+[2.]  J. Baglama and V. Perovic, "Explicit Deflation in Golub–Kahan–Lanczos Bidiagonalization Methods, ETNA, Vol. 58, (2023), pp. 164–176.
 
 [3.] B.W. Lewis, J.Baglama, L. Reichel, "The irlba Package", (2021) https://cran.r-project.org/web/packages/irlba/
 
