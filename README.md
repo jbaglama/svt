@@ -9,8 +9,8 @@
 
 ## Description:
 
-A hybrid singular value wrapper function that repeatedly calls the thick-restarted GKLB routine irlba and a block SVD power method to compute an approximate Partial Singular Value Decomposition (PSVD) of a matrix $A$. If a user threshold value (`sigma`) is given, the function will compute all singular values above such threshold (`sigma`). However, if an energy percentage ($\leq 1$) (`energy`) is given, the function computes the energy percentage. That is, it computes an $r$-rank approximation of $A$ where $(\Vert S_r\Vert_F/\Vert A\Vert_F)^2 \geq$ `energy`.  If neither are given then the function returns a $k$-PSVD. 
-
+Implements Algorithm 1 in reference [[1]](#1).
+A hybrid function for computing all singular triplets above a given threshold. The function repeatedly calls a Partial Singular Value Decomposition (PSVD) method (svds or irlba) and a block SVD power method to compute a PSVD  of a matrix $A$. If a user threshold value `sigma` is specified, the function computes all the singular values above such threshold `sigma`. However, if an energy percentage ($\leq 1$) (`energy`) is specified, this function computes  the energy percentage. i.e.  an $r$-rank approximation $A_r$ of $A$ where  $(\Vert A_r\Vert_F/\Vert A\Vert_F)^2 \geq$ `energy`. If neither are given then the function returns a $k$-PSVD with `k=6` by default. 
 
 ## Input and Optional Parameters
 
