@@ -18,7 +18,7 @@ The necessary inputs for the routine are:
 
 | Input | Version |Description |
 |:-------:|:---------:|------------|
-|`A`| **Matlab/Octave** |An $m\times n$ numeric real matrix $A$ or a function handle (for Matlab only).|
+|`A`| **Matlab/Octave** |An $m\times n$ numeric real matrix $A$ or a function handle.|
 |`A`| **${\tt R}$**| An $m\times n$ numeric sparse real matrix (matrix-product input is not available).|
 
 Meanwhile, the optional arguments for the function in the distinct languages are:
@@ -33,7 +33,7 @@ Meanwhile, the optional arguments for the function in the distinct languages are
 |`U0`| **Matlab/Octave** | Left singular vectors of an already computed PSVD of $A$ (default: `[]`)|
 |`V0`| **Matlab/Octave** | Right singular vectors of an already computed PSVD of $A$ (default: `[]`)|
 |`S0`| **Matlab/Octave** | Diagonal matrix  of an already computed PSVD of $A$ (default: `[]`)|
-|`psvd`|  **${\tt R}$**  | ${\tt List}$ of an already computed PSVD of $A$. (default: `NULL`) <br> It should satisfy that `A %*% psvd$v = psvd$u %*% diag(psvd$d)` and <br> `t(A) %*% psvd$u = psvd$v %*% diag(psvd$d)`|
+|`psvd0`|  **${\tt R}$**  | ${\tt List}$ of an already computed PSVD of $A$. (default: `NULL`) <br> It should satisfy that `A %*% psvd0$v = psvd0$u %*% diag(psvd0$d)` and <br> `t(A) %*% psvd0$u = psvd0$v %*% diag(psvd0$d)`|
 |`tol`| all | Tolerance used for convergence in the `svds`/`irlba` routine. <br> **Matlab default:** `sqrt(eps)` <br> **${\tt R}$ default:** `1e-8`|
 |`k`| all | Initial number of singular triplets (default: `6`) |
 |`incre`| all | Increment added to $k$ -internally doubled each iteration. (default: `5`) |
@@ -152,7 +152,7 @@ Below, we describe the general output of the main routines.
 
     
 ##  Date Last Modified: 
- 5/1/24
+ 5/2/24
   
 
 
